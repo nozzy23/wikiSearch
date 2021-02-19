@@ -8,12 +8,20 @@ async function handleSubmit(event) {
     const inputValue = document.querySelector('.js-search-input').value;
     // removing whitespace
     const searchQuery = inputValue.trim();
+
+    const searchResults = document.querySelector('.js-search-results');
+    searchResults.innerHTML = '';
+
+    const spinner = document.querySelector('.js-spinner');
+    spinner.classList.remove('hidden');
     try {
         const results = await searchWikipedia(searchQuery);
         displayResults(results);
     } catch (err) {
         console.log(err);
         alert('failed to search Wiki')
+    } finally {
+        spinner.classList.add('hidden');
     }
 
     console.log(searchQuery);
