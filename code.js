@@ -16,6 +16,11 @@ async function handleSubmit(event) {
     spinner.classList.remove('hidden');
     try {
         const results = await searchWikipedia(searchQuery);
+        if (results.query.searchinfo.totalhits === 0){
+            alert ('No results found');
+            return;
+        }
+        
         displayResults(results);
     } catch (err) {
         console.log(err);
